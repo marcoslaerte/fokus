@@ -10,6 +10,8 @@ const musica = new Audio('/sons/luna-rise-part-one.mp3');
 const audioPlay = new Audio('/sons/play.wav');
 const audioPausa = new Audio('/sons/pause.mp3');
 const audioTempoFinalizado = new Audio('./sons/beep.mp3');
+const iniciarOuPausarBt = document.querySelector('#start-pause span');
+const iniciarOuPausarBtIcone = document.querySelector('.app__card-primary-butto-icon');
 
 let tempoDecorridoEmSegundos = 5;
 let intervaloId = null;
@@ -68,9 +70,9 @@ function alterarContexto(contexto) {
 
 const contagemRegressiva = () => {
     if (tempoDecorridoEmSegundos <= 0) {
-        audioTempoFinalizado.play();
-        zerar();
+        //audioTempoFinalizado.play();
         alert('Tempo finalizado!');
+        zerar();
         return;
     }
     tempoDecorridoEmSegundos -= 1;
@@ -87,9 +89,13 @@ function iniciarOuPausar() {
     }
     audioPlay.play();
     intervaloId = setInterval(contagemRegressiva, 1000); // setInterval recebe a função que será executada e o intervalo de tempo em milisegundos.
+    iniciarOuPausarBt.textContent = "Pausar";
+    iniciarOuPausarBtIcone.setAttribute('src', '/imagens/pause.png');
 }
 
 function zerar() {
     clearInterval(intervaloId); // Para a execução da função que intervaloId está apontando.
+    iniciarOuPausarBt.textContent = "Começar";
+    iniciarOuPausarBtIcone.setAttribute('src', '/imagens/play_arrow.png');
     intervaloId = null;
 }
