@@ -8,6 +8,8 @@ const musicaFocoInput = document.querySelector('#alternar-musica');
 const musica = new Audio('/sons/luna-rise-part-one.mp3');
 musica.loop = true;
 
+let tempoDecorridoEmSegundos = 5;
+
 musicaFocoInput.addEventListener('change', () => {
     if (musica.paused) {
         musica.play();
@@ -37,4 +39,23 @@ function alterarContexto(contexto) {
     });
     html.setAttribute('data-contexto', contexto);
     banner.setAttribute('src', `/imagens/${contexto}.png`);
+    switch (contexto) {
+        case "foco":
+            titulo.innerHTML = `
+            Otimize sua produtividade,<br>
+                <strong class="app__title-strong">mergulhe no que importa.</strong>
+            `
+            break;
+        case "descanso-curto":
+            titulo.innerHTML = `
+            Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>
+            ` 
+            break;
+        case "descanso-longo":
+            titulo.innerHTML = `
+            Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>
+            `
+        default:
+            break;
+    }
 }
